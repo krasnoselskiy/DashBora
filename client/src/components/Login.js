@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { userLogin } from '../actions/user';
-import ActionTypes from '../constants/actionTypes';
 
 const Login = () => {
   const onFinish = values => {

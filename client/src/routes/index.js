@@ -8,7 +8,7 @@ import Register from '../components/Register';
 
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.css';
-import NotForbidden from '../components/NotForbidden';
+import Forbidden from '../components/Forbidden';
 
 const Container = styled.div`
   text-align: center;
@@ -27,7 +27,7 @@ function Routes() {
             <Login />
           </Route>
           <Route>
-            <NotForbidden />
+            <Forbidden />
           </Route>
         </Switch>
       </Container>

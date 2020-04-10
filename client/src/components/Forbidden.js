@@ -3,7 +3,7 @@ import { Row, Col } from 'antd';
 import { Link } from "react-router-dom";
 import styled from '@emotion/styled'
 
-const NotForbidden = () => {
+const Forbidden = () => {
   return (
     <Row type="flex" justify="center" align="middle" style={{ minHeight: '100vh' }}>
       <Col span={6} >
@@ -35,4 +35,4 @@ const TextWrap = styled.div`
   }
 `
 
-export default NotForbidden;
+export default Forbidden;
