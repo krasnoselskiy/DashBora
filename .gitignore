@@ -6,7 +6,8 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-./server/src/config/
+server/src/config/env.ts
+
 
 # Icon must end with two \r
 Icon
