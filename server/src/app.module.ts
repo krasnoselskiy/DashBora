@@ -1,10 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose'
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+import config from './config/env';
 
 @Module({
-  imports: [],
+  imports: [
+    MongooseModule.forRoot(
+      config.DB_URI,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    ),
+    SharedModule,
+    AuthModule
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule {
+}
