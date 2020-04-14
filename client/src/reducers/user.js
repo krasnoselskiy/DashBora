@@ -22,6 +22,7 @@ export default function user(state = initialState, action) {
         isLogin: true,
         isStart: false,
         isError: false,
+        error: null,
       },
         {
           username: action.payload
