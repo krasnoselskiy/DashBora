@@ -5,7 +5,7 @@ const initialState = {
   isStart: false,
   isError: false,
   error: null,
-  username: null,
+  info: null,
 }
 
 export default function user(state = initialState, action) {
@@ -25,7 +25,7 @@ export default function user(state = initialState, action) {
         error: null,
       },
         {
-          username: action.payload
+          info: action.payload
         }
       )
     case ActionTypes.LOGIN_ERROR:
