@@ -8,9 +8,7 @@ import { RegisterDTO, LoginDTO } from '../auth/auth-dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private userModel: Model<User>) {
-
-  }
+  constructor(@InjectModel('User') private userModel: Model<User>) {}
 
   private sanitizeUser(user: User) {
     return user.depopulate('password');
@@ -45,5 +43,10 @@ export class UserService {
       throw new HttpException('Invalid credentials',
         HttpStatus.UNAUTHORIZED);
     }
+  }
+
+  async findByPayload(payload: any) {
+    const { username } = payload;
+    return await this.userModel.findOne({ username });
   }
 }
