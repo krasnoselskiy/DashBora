@@ -1,41 +1,42 @@
-import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import React, {useEffect } from 'react';
+import { Router, Switch, Route} from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import Login from '../components/Login'
 import Register from '../components/Register';
 import Main from '../containers/Main';
 import Forbidden from '../components/Forbidden';
-import LayoutsSwitcher from '../components/LayoutsSwitcher';
+import PrivateRoute from '../components/PrivateRoute';
+import { isLoginCheck } from '../actions/user';
+import history from './history';
 
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.css';
 
-export const history = createBrowserHistory()
+function Routes() {
 
-function Routes({ isLogin }) {
+  useEffect(() => {
+    isLoginCheck();
+  }, []);
+
+
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path='/'>
-          <LayoutsSwitcher isLoggedIn={isLogin} />
-        </Route>
-        <Route exact path='/home'>
-          <Main isLoggedIn={isLogin} />
-        </Route>
-        <Route path='/login' component={Login} />
+        <Route exact path='/' component={Login} />
+        <Route exact path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <PrivateRoute exact path='/home' component={Main} />
         <Route component={Forbidden} />
       </Switch>
     </Router>
   )
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    isLogin: state.user.isLogin
-  }
-};
+    isLoginCheck: () => dispatch(isLoginCheck())
+  };
+}
 
-export default connect(mapStateToProps)(Routes);
+export default connect(null, mapDispatchToProps)(Routes);
