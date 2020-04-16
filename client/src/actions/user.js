@@ -21,7 +21,8 @@ export async function userLogin(payload) {
     });
 
     localStorage.setItem("token", res.data.token);
-    history.push('/home');
+
+    history.push('/main');
   } catch (e) {
     store.dispatch({
       type: ActionTypes.LOGIN_ERROR,
@@ -74,7 +75,7 @@ export async function isLoginCheck() {
         payload: res.data.username
       });
 
-      history.push('/home');
+      history.push('/main');
     } catch (e) {
       store.dispatch({
         type: ActionTypes.LOGIN_ERROR,
@@ -86,4 +87,10 @@ export async function isLoginCheck() {
     }
   }
 
+}
+
+export async function logout() {
+  store.dispatch({
+    type: ActionTypes.LOGOUT
+  });
 }
