@@ -1,13 +1,17 @@
 import React, {useEffect } from 'react';
-import { Router, Switch, Route} from 'react-router-dom'
+import { Router, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 
+import MainLayout from '../layouts/MainLayout';
+import LoginLayout from '../layouts/LoginLayout';
 import Login from '../components/Login'
 import Register from '../components/Register';
-import Main from '../containers/Main';
+import Widgets from '../components/Widgets';
+import Team from '../components/Team';
+import Profile from '../components/Profile';
 import Forbidden from '../components/Forbidden';
-import PrivateRoute from '../components/PrivateRoute';
 import { isLoginCheck } from '../actions/user';
+import { AppRoute } from './appRoute';
 import history from './history';
 
 import 'antd/dist/antd.css';
@@ -17,17 +21,20 @@ function Routes() {
 
   useEffect(() => {
     isLoginCheck();
-  }, []);
 
+
+  }, []);
 
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path='/' component={Login} />
-        <Route exact path='/login' component={Login} />
-        <Route path='/register' component={Register} />
-        <PrivateRoute exact path='/home' component={Main} />
-        <Route component={Forbidden} />
+        <AppRoute exact path="/main" layout={MainLayout} component={Widgets} />
+        <AppRoute exact path="/main/widgets" layout={MainLayout} component={Widgets} />
+        <AppRoute exact path="/main/team" layout={MainLayout} component={Team} />
+        <AppRoute path="/main/profile" layout={MainLayout} component={Profile} />
+        <AppRoute exact path="/login" layout={LoginLayout} component={Login} />
+        <AppRoute exact path="/register" layout={LoginLayout} component={Register} />
+        <AppRoute layout={LoginLayout} component={Forbidden} />
       </Switch>
     </Router>
   )
