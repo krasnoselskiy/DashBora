@@ -35,6 +35,14 @@ export default function user(state = initialState, action) {
         isError: true,
         error: action.payload
       })
+    case ActionTypes.LOGOUT:
+      return Object.assign({}, state, {
+        isStart: false,
+        isLogin: false,
+        isError: false,
+        info: null,
+        error: null
+      })
     default:
       return state
   }

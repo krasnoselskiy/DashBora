@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import { Layout } from 'antd';
 
 import { logout } from '../actions/user';
@@ -7,7 +6,7 @@ import Sider from '../components/Sider';
 import Header from '../components/Header';
 import history from '../routes/history';
 
-function Main(props) {
+function MainLayout(props) {
   const { Content } = Layout;
 
   const logoutHandler = () => {
@@ -33,10 +32,5 @@ function Main(props) {
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logout: () => dispatch(logout())
-  };
-}
 
-export default connect(null, mapDispatchToProps)(Main);
+export default MainLayout;
