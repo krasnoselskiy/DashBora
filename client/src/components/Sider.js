@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 import {
-  DesktopOutlined,
+  // DesktopOutlined,
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 
-const Sider = ({ username }) => {
+const Sider = (props) => {
   const { Sider } = Layout;
   const { SubMenu } = Menu;
+  const { logoutHandler } = props;
   const [collapsed, setCollapse] = useState(false);
 
   const onCollapse = () => {
@@ -21,36 +23,30 @@ const Sider = ({ username }) => {
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1">
           <PieChartOutlined />
-          <span>Option 1</span>
+          <Link to="/main/widgets">My widgets</Link>
         </Menu.Item>
-        <Menu.Item key="2">
+        {/* <Menu.Item key="2">
           <DesktopOutlined />
           <span>Option 2</span>
+        </Menu.Item> */}
+        <Menu.Item key="5">
+          <TeamOutlined />
+          <Link to="/main/team">My team</Link>
         </Menu.Item>
         <SubMenu
           key="sub1"
           title={
             <span>
               <UserOutlined />
-              <span>User</span>
+              <span>My account</span>
             </span>
           }
         >
-          <Menu.Item key="3">{username ? `Hello, ${username}` : 'Your name'}</Menu.Item>
-          <Menu.Item key="4">Logout</Menu.Item>
+          <Menu.Item key="3">
+            <Link to="/main/profile">My profile</Link>
+          </Menu.Item>
+          <Menu.Item key="4" onClick={logoutHandler}>Logout</Menu.Item>
         </SubMenu>
-        <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <TeamOutlined />
-                <span>Team</span>
-              </span>
-            }
-          >
-            <Menu.Item key="6">Team 1</Menu.Item>
-            <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu>
       </Menu>
     </Sider>
   );
