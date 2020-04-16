@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col } from 'antd';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -52,19 +52,14 @@ const Login = ({ error }) => {
                 placeholder="Password"
               />
             </Form.Item>
-            <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
 
-            </Form.Item>
 
-            <Form.Item>
+            <Form.Item className="btn-row">
               <Button type="primary" htmlType="submit" className="login-form-button" style={{ marginRight: "1em" }}>
                 Log in
               </Button>
 
-              Or  <Link to="/register">register now!</Link>
+              <Link to="/register">register me!</Link>
             </Form.Item>
           </Form>
         </Col>
