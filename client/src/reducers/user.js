@@ -2,7 +2,7 @@ import ActionTypes from '../constants/actionTypes'
 
 const initialState = {
   isLogin: false,
-  isStart: false,
+  isLoadingStart: false,
   isError: false,
   error: null,
   info: null,
