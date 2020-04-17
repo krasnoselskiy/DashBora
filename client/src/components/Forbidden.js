@@ -10,7 +10,7 @@ const Forbidden = () => {
         <TextWrap>
           <div className="text">404</div>
           <div className="textDescription">Page not found</div>
-          <Link className="link"  to="/">Go home!</Link>
+          <Link className="link"  to="/main">Go home!</Link>
         </TextWrap>
       </Col>
     </Row>
@@ -18,6 +18,9 @@ const Forbidden = () => {
 }
 
 const TextWrap = styled.div`
+  text-align: center;
+  color: #fff;
+
   .text {
     font-size: 100px;
     line-height: 1.1;
@@ -28,7 +31,7 @@ const TextWrap = styled.div`
   }
 
   .link {
-    color: rgba(0, 0, 0, 0.65);
+    color: #fff;
     margin-top: 10px;
     display: block;
     text-decoration: underline;
