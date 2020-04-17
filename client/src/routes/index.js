@@ -6,9 +6,9 @@ import MainLayout from '../layouts/MainLayout';
 import EmptyLayout from '../layouts/EmptyLayout';
 import Login from '../components/Login'
 import Register from '../components/Register';
-import Widgets from '../components/Widgets';
-import Team from '../components/Team';
-import Profile from '../components/Profile';
+import Widgets from '../containers/Widgets';
+import Team from '../containers/Team';
+import Profile from '../containers/Profile';
 import Forbidden from '../components/Forbidden';
 import { isLoginCheck } from '../actions/user';
 import { AppRoute } from './appRoute';
