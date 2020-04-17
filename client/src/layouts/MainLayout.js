@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 
 import { logout } from '../actions/user';
 import Sider from '../components/Sider';
+import Preloader from '../components/Preloader';
 import Header from '../components/Header';
 import history from '../routes/history';
 
@@ -22,9 +23,10 @@ function MainLayout(props) {
         <Sider
           logoutHandler={logoutHandler} />
 
-        <Layout className="site-layout">
+        <Layout className="site-layout posr">
           <Content style={{ margin: '0 16px' }}>
             {props.children}
+            {/* <Preloader /> */}
           </Content>
         </Layout>
       </Layout>
