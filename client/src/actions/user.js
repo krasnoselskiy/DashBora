@@ -23,7 +23,7 @@ export async function userLogin(payload) {
 
     localStorage.setItem("token", res.data.token);
 
-    history.push('/main');
+    history.push('/');
   } catch (e) {
     message.error(e.response.data.message, 1);
     store.dispatch({
@@ -79,7 +79,7 @@ export async function isLoginCheck() {
         payload: res.data.username
       });
 
-      history.push('/main');
+      history.push('/');
     } catch (e) {
       store.dispatch({
         type: ActionTypes.LOGIN_ERROR,
