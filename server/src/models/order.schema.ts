@@ -5,10 +5,6 @@ export const OrderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  totalPrice: {
-    type: Number,
-    default: 0
-  },
   products: [{
     product: {
       type: mongoose.Schema.Types.ObjectId,
