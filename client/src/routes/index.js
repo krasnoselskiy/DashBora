@@ -3,7 +3,7 @@ import { Router, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import MainLayout from '../layouts/MainLayout';
-import LoginLayout from '../layouts/LoginLayout';
+import EmptyLayout from '../layouts/EmptyLayout';
 import Login from '../components/Login'
 import Register from '../components/Register';
 import Widgets from '../components/Widgets';
@@ -18,7 +18,6 @@ import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.css';
 
 function Routes() {
-
   useEffect(() => {
     isLoginCheck();
 
@@ -32,9 +31,9 @@ function Routes() {
         <AppRoute exact path="/main/widgets" layout={MainLayout} component={Widgets} />
         <AppRoute exact path="/main/team" layout={MainLayout} component={Team} />
         <AppRoute path="/main/profile" layout={MainLayout} component={Profile} />
-        <AppRoute exact path="/login" layout={LoginLayout} component={Login} />
-        <AppRoute exact path="/register" layout={LoginLayout} component={Register} />
-        <AppRoute layout={LoginLayout} component={Forbidden} />
+        <AppRoute exact path="/login" layout={EmptyLayout} component={Login} />
+        <AppRoute exact path="/register" layout={EmptyLayout} component={Register} />
+        <AppRoute layout={EmptyLayout} component={Forbidden} />
       </Switch>
     </Router>
   )
