@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { MongooseModule } from '@nestjs/mongoose'
-import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './auth/auth.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './components/auth/auth.module';
+import { WidgetsModule } from './components/widgets/widgets.module';
+
 import config from './config/env';
+
 
 @Module({
   imports: [
@@ -14,11 +15,8 @@ import config from './config/env';
         useUnifiedTopology: true
       }
     ),
-    SharedModule,
-    AuthModule
+    AuthModule,
+    WidgetsModule
   ],
-  controllers: [AppController],
-  providers: [],
 })
-export class AppModule {
-}
+export class AppModule { }
