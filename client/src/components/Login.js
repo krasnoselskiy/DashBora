@@ -14,8 +14,6 @@ const Login = ({ error }) => {
   return (
     <Row type="flex" justify="center" align="middle" style={{ minHeight: '100vh' }}>
       <Col span={6} >
-        {error ? <p>{error}</p> : null}
-
         <Form
           name="login"
           className="login-form"

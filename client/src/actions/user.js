@@ -1,5 +1,6 @@
 import ActionTypes from '../constants/actionTypes'
 import axios from "axios";
+import { message } from 'antd';
 import history from '../routes/history';
 
 import store from '../store'
@@ -24,6 +25,7 @@ export async function userLogin(payload) {
 
     history.push('/main');
   } catch (e) {
+    message.error(e.response.data.message, 1);
     store.dispatch({
       type: ActionTypes.LOGIN_ERROR,
       payload: e.response.data.message
@@ -48,6 +50,8 @@ export async function userRegister(payload) {
 
     history.push('/login');
   } catch (e) {
+    message.error(e.response.data.message, 1);
+
     store.dispatch({
       type: ActionTypes.REGISTER_ERROR,
       payload: e.response.data.message
