@@ -12,7 +12,7 @@ interface Address {
 export interface User extends Document {
   username: string;
   readonly password: string;
-  seller: boolean;
+  isSuperAdmin: boolean;
   address: Address;
   created: Date;
 }

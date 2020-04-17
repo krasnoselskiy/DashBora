@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 export const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
-  seller: {
+  isSuperAdmin: {
     type: Boolean,
     default: false
   },

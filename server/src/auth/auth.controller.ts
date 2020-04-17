@@ -22,7 +22,7 @@ export class AuthController {
 
     const payload = {
       username: user.username,
-      seller: user.seller
+      isSuperAdmin: user.isSuperAdmin
     }
 
     const token = await this.authService.signPayload(payload);
@@ -36,7 +36,7 @@ export class AuthController {
 
     const payload = {
       username: user.username,
-      seller: user.seller
+      isSuperAdmin: user.isSuperAdmin
     }
 
     const token = await this.authService.signPayload(payload);
