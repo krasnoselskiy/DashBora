@@ -23,7 +23,7 @@ const Sider = (props) => {
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1">
           <PieChartOutlined />
-          <Link to="/main/widgets">My widgets</Link>
+          <Link to="/widgets">My widgets</Link>
         </Menu.Item>
         {/* <Menu.Item key="2">
           <DesktopOutlined />
@@ -31,7 +31,7 @@ const Sider = (props) => {
         </Menu.Item> */}
         <Menu.Item key="5">
           <TeamOutlined />
-          <Link to="/main/team">My team</Link>
+          <Link to="/team">My team</Link>
         </Menu.Item>
         <SubMenu
           key="sub1"
@@ -43,7 +43,7 @@ const Sider = (props) => {
           }
         >
           <Menu.Item key="3">
-            <Link to="/main/profile">My profile</Link>
+            <Link to="/profile">My profile</Link>
           </Menu.Item>
           <Menu.Item key="4" onClick={logoutHandler}>Logout</Menu.Item>
         </SubMenu>

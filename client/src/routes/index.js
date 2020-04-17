@@ -27,10 +27,10 @@ function Routes() {
   return (
     <Router history={history}>
       <Switch>
-        <AppRoute exact path="/main" layout={MainLayout} component={Widgets} />
-        <AppRoute exact path="/main/widgets" layout={MainLayout} component={Widgets} />
-        <AppRoute exact path="/main/team" layout={MainLayout} component={Team} />
-        <AppRoute path="/main/profile" layout={MainLayout} component={Profile} />
+        <AppRoute exact path="/" layout={MainLayout} component={Widgets} />
+        <AppRoute exact path="/widgets" layout={MainLayout} component={Widgets} />
+        <AppRoute exact path="/team" layout={MainLayout} component={Team} />
+        <AppRoute exact path="/profile" layout={MainLayout} component={Profile} />
         <AppRoute exact path="/login" layout={EmptyLayout} component={Login} />
         <AppRoute exact path="/register" layout={EmptyLayout} component={Register} />
         <AppRoute layout={EmptyLayout} component={Forbidden} />

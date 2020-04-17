@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 
 import { logout } from '../actions/user';
 import Sider from '../components/Sider';
-import Preloader from '../components/Preloader';
+// import Preloader from '../components/Preloader';
 import Header from '../components/Header';
 import history from '../routes/history';
 
