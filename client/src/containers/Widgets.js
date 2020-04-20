@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import styled from '@emotion/styled';
+import { Col, Row } from 'antd';
 
 import { widgetsFetch } from '../actions/widgets';
 import Preloader from '../components/Preloader';
@@ -16,20 +16,25 @@ const Widgets = (props) => {
   }, [widgets.length]);
 
   return (
-    <>
+    <React.Fragment>
       {loading && Preloader ?
         <Preloader /> : null
       }
       {error && FetchError ?
         <FetchError /> : null
       }
-      <WidgetList>
-        {widgets && WidgetItem ?
-          widgets.map((item, i) => (
-            <WidgetItem key={item._id} item={item} />
-          )) : null}
-      </WidgetList>
-    </>
+
+      <Row
+        gutter={16}
+        style={{ marginTop: "15px" }}>
+          {widgets && WidgetItem ?
+            widgets.map((item, i) => (
+              <Col span={8}>
+                <WidgetItem key={item._id} item={item} />
+              </Col>
+            )) : null}
+      </Row>
+    </React.Fragment>
   );
 }
 
@@ -46,12 +51,5 @@ const mapStateToProps = (state) => {
     error: state.widgets.error,
   };
 }
-
-const WidgetList = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-top: 15px;
-`
 
 export default connect(mapStateToProps, mapDispatchToProps)(Widgets);
