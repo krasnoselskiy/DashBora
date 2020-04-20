@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import * as moment from 'moment';
 
 const WidgetItem = (props) => {
-  const { name, date } = props.item;
+  const { name, date, _id } = props.item;
   return (
     <Card
       title={name}
       extra={
-        <Button type="primary">Go to widget</Button>
+        <Button type="primary">
+          <Link to={`/widgets/${_id}`}>Go to widget</Link>
+        </Button>
       }
     >
       <p>{moment(date).format('MM.DD.YYYY')}</p>
