@@ -1,4 +1,4 @@
-import { UserService } from '../../shared/user.service';
+import { UserService } from '../user/user.service';
 import { Injectable } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
 import config from '../../config/env';

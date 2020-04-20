@@ -8,14 +8,6 @@ export const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  address: {
-    addr1: String,
-    addr2: String,
-    city: String,
-    state: String,
-    country: String,
-    zip: String,
-  },
   created: {
     type: Date,
     default: Date.now,
@@ -23,8 +15,8 @@ export const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre('save', async function (
-    next: mongoose.HookNextFunction
-  ) {
+  next: mongoose.HookNextFunction
+) {
   try {
     if (!this.isModified('password')) {
       return next();
@@ -32,5 +24,5 @@ UserSchema.pre('save', async function (
     const hashed = await bcrypt.hash(this['password'], 10);
     this['password'] = hashed;
     return next();
-  } catch (err) {} finally {}
+  } catch (err) { } finally { }
 });

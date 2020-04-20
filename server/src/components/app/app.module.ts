@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from './components/auth/auth.module';
-import { WidgetsModule } from './components/widgets/widgets.module';
-import { TeamsModule } from './components/teams/teams.module';
+import { AuthModule } from '../auth/auth.module';
+import { WidgetsModule } from '../widgets/widgets.module';
+import { TeamsModule } from '../teams/teams.module';
 
-import config from './config/env';
+import config from '../../config/env';
 
 
 @Module({

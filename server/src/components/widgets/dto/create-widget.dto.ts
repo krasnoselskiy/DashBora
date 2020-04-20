@@ -1,4 +1,5 @@
 export class CreateWidgetDto {
-  readonly name: string;
-  readonly date: Date;
+  name: string;
+  description: string;
+  date: Date;
 }

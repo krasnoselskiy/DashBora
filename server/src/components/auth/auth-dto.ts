@@ -6,5 +6,6 @@ export interface LoginDTO {
 export interface RegisterDTO {
   username: string;
   password: string;
+  email: string;
   isSuperAdmin: boolean;
 }
