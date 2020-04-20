@@ -1,27 +1,34 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import styled from '@emotion/styled';
 
 import { widgetsFetch } from '../actions/widgets';
 import Preloader from '../components/Preloader';
+import WidgetItem from '../components/WidgetItem';
+import FetchError from '../components/FetchError';
 
 const Widgets = (props) => {
   const { widgets, loading, error } = props;
   useEffect(() => {
-    widgetsFetch();
-  }, []);
+    if (widgets.length === 0) {
+      widgetsFetch();
+    }
+  }, [widgets.length]);
 
   return (
     <>
-      {loading ?
+      {loading && Preloader ?
         <Preloader /> : null
       }
-      {/* {error ?
-        <Preloader /> : null
-      } */}
-      {widgets ?
-        widgets.map((item) => (
-          console.log(item)
-        )) : null}
+      {error && FetchError ?
+        <FetchError /> : null
+      }
+      <WidgetList>
+        {widgets && WidgetItem ?
+          widgets.map((item, i) => (
+            <WidgetItem key={item._id} item={item} />
+          )) : null}
+      </WidgetList>
     </>
   );
 }
@@ -39,5 +46,12 @@ const mapStateToProps = (state) => {
     error: state.widgets.error,
   };
 }
+
+const WidgetList = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 15px;
+`
 
 export default connect(mapStateToProps, mapDispatchToProps)(Widgets);
