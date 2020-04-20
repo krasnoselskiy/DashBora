@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Badge } from 'antd';
 import {
   // DesktopOutlined,
   PieChartOutlined,
@@ -31,7 +31,9 @@ const Sider = (props) => {
         </Menu.Item> */}
         <Menu.Item key="5">
           <TeamOutlined />
-          <Link to="/team">My team</Link>
+          <Badge count={0}>
+            <Link to="/team">My team</Link>
+          </Badge>
         </Menu.Item>
         <SubMenu
           key="sub1"

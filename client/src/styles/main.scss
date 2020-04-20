@@ -44,6 +44,20 @@ body {
   margin-top: 0;
 }
 
+.ant-badge-count {
+  right: -10px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 4px;
+  color: $white;
+  font-size: 9px;
+  line-height: 14px;
+}
+
+.ant-menu-item > .ant-badge > a {
+  color: $white;
+}
+
 .posr {
   position: relative;
 }
