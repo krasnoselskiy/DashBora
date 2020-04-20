@@ -5,6 +5,7 @@ const initialState = {
   isLoadingStart: false,
   isError: false,
   error: null,
+  teams: null,
   info: null,
 }
 
