@@ -9,6 +9,7 @@ import FetchError from '../components/FetchError';
 
 const Widgets = (props) => {
   const { widgets, loading, error } = props;
+
   useEffect(() => {
     if (widgets.length === 0) {
       widgetsFetch();
@@ -28,8 +29,10 @@ const Widgets = (props) => {
         gutter={16}>
           {widgets && WidgetItem ?
             widgets.map((item, i) => (
-              <Col span={8}>
-                <WidgetItem key={item._id} item={item} />
+              <Col
+                key={item._id}
+                span={8}>
+                <WidgetItem item={item} />
               </Col>
             )) : null}
       </Row>
