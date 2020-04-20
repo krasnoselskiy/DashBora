@@ -32,7 +32,7 @@ const Sider = (props) => {
         <Menu.Item key="5">
           <TeamOutlined />
           <Badge count={0}>
-            <Link to="/team">My team</Link>
+            <Link to="/teams">My teams</Link>
           </Badge>
         </Menu.Item>
         <SubMenu
