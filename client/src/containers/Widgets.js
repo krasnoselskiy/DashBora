@@ -25,8 +25,7 @@ const Widgets = (props) => {
       }
 
       <Row
-        gutter={16}
-        style={{ marginTop: "15px" }}>
+        gutter={16}>
           {widgets && WidgetItem ?
             widgets.map((item, i) => (
               <Col span={8}>

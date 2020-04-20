@@ -24,7 +24,7 @@ function MainLayout(props) {
           logoutHandler={logoutHandler} />
 
         <Layout className="site-layout posr">
-          <Content style={{ margin: '0 16px' }}>
+          <Content style={{ margin: '16px' }}>
             {props.children}
             {/* <Preloader /> */}
           </Content>
