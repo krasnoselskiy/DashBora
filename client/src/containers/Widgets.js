@@ -25,6 +25,7 @@ const Widgets = (props) => {
         <FetchError /> : null
       }
 
+      <h2>All widgets</h2>
       <Row
         gutter={16}>
           {widgets && WidgetItem ?
@@ -36,6 +37,9 @@ const Widgets = (props) => {
               </Col>
             )) : null}
       </Row>
+
+      <h2>Installed widgets</h2>
+
     </React.Fragment>
   );
 }
