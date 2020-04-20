@@ -23,6 +23,7 @@ export async function userLogin(payload) {
     });
 
     localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user_id", res.data.user._id);
 
     history.push('/');
   } catch (e) {
@@ -46,8 +47,6 @@ export async function userRegister(payload) {
       type: ActionTypes.REGISTER_SUCCESS,
       payload: res.data.user.username
     });
-
-    localStorage.setItem("token", res.data.token);
 
     history.push('/login');
   } catch (e) {
@@ -98,4 +97,6 @@ export async function logout() {
   store.dispatch({
     type: ActionTypes.LOGOUT
   });
+
+  localStorage.removeItem("user_id");
 }
