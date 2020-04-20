@@ -18,6 +18,7 @@ export async function userLogin(payload) {
       type: ActionTypes.LOGIN_SUCCESS,
       payload: {
         username: res.data.user.username,
+        id: res.data.user._id,
       }
     });
 
