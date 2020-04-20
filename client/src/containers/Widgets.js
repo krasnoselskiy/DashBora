@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 
-import { widgetsFetch } from '../actions/widgets';
+import { widgetsFetch, addWidget } from '../actions/widgets';
 import Preloader from '../components/Preloader';
 import WidgetItem from '../components/WidgetItem';
 import FetchError from '../components/FetchError';
@@ -15,6 +15,12 @@ const Widgets = (props) => {
       widgetsFetch();
     }
   }, [widgets.length]);
+
+  const addCurrentWidget = (widgetId) => {
+    const user_id = localStorage.getItem("user_id");
+
+    addWidget(user_id, widgetId)
+  }
 
   return (
     <React.Fragment>
@@ -29,11 +35,11 @@ const Widgets = (props) => {
       <Row
         gutter={16}>
           {widgets && WidgetItem ?
-            widgets.map((item, i) => (
+            widgets.map((item) => (
               <Col
                 key={item._id}
                 span={8}>
-                <WidgetItem item={item} />
+                <WidgetItem addWidget={addCurrentWidget} item={item} />
               </Col>
             )) : null}
       </Row>
@@ -46,7 +52,8 @@ const Widgets = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    widgetsFetch: () => dispatch(widgetsFetch())
+    widgetsFetch: () => dispatch(widgetsFetch()),
+    addWidget: () => dispatch(addWidget()),
   };
 }
 

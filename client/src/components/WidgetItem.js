@@ -1,17 +1,24 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import { Link } from "react-router-dom";
 import * as moment from 'moment';
 
 const WidgetItem = (props) => {
   const { name, date, _id } = props.item;
+  const { addWidget } = props;
+
+  const onClick = (e) => {
+    addWidget(e.target.id);
+  }
+
   return (
     <Card
       title={name}
       extra={
-        <Button type="primary">
-          <Link to={`/widgets/${_id}`}>Go to widget</Link>
-        </Button>
+        <Button
+          id={_id}
+          onClick={onClick}
+          type="primary"
+        >Add!</Button>
       }
     >
       <p>{moment(date).format('MM.DD.YYYY')}</p>

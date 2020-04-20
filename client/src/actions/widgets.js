@@ -26,3 +26,31 @@ export async function widgetsFetch() {
   }
 }
 
+export async function addWidget(user_id, widget_id) {
+  try {
+    const payload = {
+      user_id,
+      widget_id
+    };
+
+    store.dispatch({
+      type: ActionTypes.ADD_WIDGET_BEGIN,
+      payload: payload
+    });
+
+    const res = await axios.put('http://localhost:3001/api/v1/widgets', payload);
+
+    store.dispatch({
+      type: ActionTypes.ADD_WIDGET_SUCCESS,
+      payload: ''
+    });
+
+  } catch (e) {
+    message.error(e.response.data.message, 1);
+    store.dispatch({
+      type: ActionTypes.ADD_WIDGET_ERROR,
+      payload: e.response.data.message
+    });
+  }
+}
+
