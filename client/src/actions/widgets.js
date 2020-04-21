@@ -38,11 +38,10 @@ export async function addWidget(user_id, widget_id) {
       payload: payload
     });
 
-    const res = await axios.put('http://localhost:3001/api/v1/widgets', payload);
+    await axios.put('http://localhost:3001/api/v1/widgets', payload);
 
     store.dispatch({
-      type: ActionTypes.ADD_WIDGET_SUCCESS,
-      payload: ''
+      type: ActionTypes.ADD_WIDGET_SUCCESS
     });
 
   } catch (e) {
