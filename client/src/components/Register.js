@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { register } from '../actions/login';
 
-const Register = ({ error }) => {
+const Register = () => {
   const onFinish = values => {
     register(values)
   };
@@ -14,8 +14,6 @@ const Register = ({ error }) => {
   return (
     <Row type="flex" justify="center" align="middle" style={{ minHeight: '100vh' }}>
       <Col span={6} >
-        {error ? <p>{error}</p> : null}
-
         <Form
           name="login"
           className="login-form"
@@ -63,18 +61,10 @@ const Register = ({ error }) => {
   );
 }
 
-
-const mapStateToProps = state => {
-  return {
-    login: state.user.login,
-    error: state.user.error
-  }
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     register: e => dispatch(register(e))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Register);
