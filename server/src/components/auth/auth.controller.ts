@@ -1,6 +1,12 @@
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import {
+  UseGuards,
+  Controller,
+  Get,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
@@ -13,7 +19,7 @@ export class AuthController {
   @Get()
   @UseGuards(AuthGuard('jwt'))
   tempAUth() {
-    return { auth: 'works' }
+    return { auth: 'success' }
   }
 
   @Post('login')
