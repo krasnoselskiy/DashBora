@@ -29,8 +29,7 @@ export async function widgetsFetch() {
 export async function addWidget(user_id, widget_id) {
   try {
     const payload = {
-      user_id,
-      widget_id
+      "name": "Calenda 2"
     };
 
     store.dispatch({
@@ -38,7 +37,7 @@ export async function addWidget(user_id, widget_id) {
       payload: payload
     });
 
-    await axios.put('http://localhost:3001/api/v1/widgets', payload);
+    await axios.put('http://localhost:3001/api/v1/widgets/edit?widgetID=' + widget_id, payload);
 
     store.dispatch({
       type: ActionTypes.ADD_WIDGET_SUCCESS
