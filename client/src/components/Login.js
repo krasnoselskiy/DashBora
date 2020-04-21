@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { login } from '../actions/login';
 
-const Login = ({ error }) => {
+const Login = () => {
   const onFinish = values => {
     login(values)
   };
@@ -63,20 +63,13 @@ const Login = ({ error }) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    login: state.user.login,
-    error: state.user.error
-  }
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     login: e => dispatch(login(e))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);
 
 
 

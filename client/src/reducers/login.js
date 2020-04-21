@@ -18,8 +18,8 @@ export default function login(state = initialState, action) {
         state, {
         isLoginBegin: false,
         isLoginSuccess: true,
-        error: null,
-      })
+          error: null,
+        })
     case ActionTypes.LOGIN_ERROR:
       return Object.assign({}, state, {
         isLoginBegin: false,
