@@ -1,47 +1,35 @@
 import ActionTypes from '../constants/actionTypes'
 
 const initialState = {
-  isLogin: false,
-  isLoadingStart: false,
-  isError: false,
+  isLoginBegin: false,
+  isLoginSuccess: false,
   error: null,
-  teams: null,
-  info: null,
 }
 
-export default function user(state = initialState, action) {
+export default function login(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.LOGIN_BEGIN:
       return Object.assign({}, state, {
-        isLogin: false,
-        isStart: true,
-        isError: false,
+        isLoginBegin: true,
+        isLoginSuccess: false,
       })
     case ActionTypes.LOGIN_SUCCESS:
       return Object.assign({},
         state, {
-        isLogin: true,
-        isStart: false,
-        isError: false,
+        isLoginBegin: false,
+        isLoginSuccess: true,
         error: null,
-      },
-        {
-          info: action.payload
-        }
-      )
+      })
     case ActionTypes.LOGIN_ERROR:
       return Object.assign({}, state, {
-        isStart: false,
-        isLogin: false,
-        isError: true,
+        isLoginBegin: false,
+        isLoginSuccess: false,
         error: action.payload
       })
     case ActionTypes.LOGOUT:
       return Object.assign({}, state, {
-        isStart: false,
-        isLogin: false,
-        isError: false,
-        info: null,
+        isLoginBegin: false,
+        isLoginSuccess: false,
         error: null
       })
     default:

@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import { userLogin } from '../actions/user';
+import { login } from '../actions/login';
 
 const Login = ({ error }) => {
   const onFinish = values => {
-    userLogin(values)
+    login(values)
   };
 
   return (
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    userLogin: e => dispatch(userLogin(e))
+    login: e => dispatch(login(e))
   };
 }
 

@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux'
 
-import user from './user'
+import login from './login'
 import teams from './teams'
 import widgets from './widgets'
+import profile from './profile'
 
 const rootReducer = combineReducers({
   teams,
-  user,
+  login,
   widgets,
+  profile,
 })
 
 export default rootReducer

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 
-import { logout } from '../actions/user';
+import { logout } from '../actions/login';
 import Sider from '../components/Sider';
 // import Preloader from '../components/Preloader';
 import Header from '../components/Header';
@@ -11,8 +11,8 @@ function MainLayout(props) {
   const { Content } = Layout;
 
   const logoutHandler = () => {
-    localStorage.removeItem('token');
     logout();
+    localStorage.removeItem('token');
     history.push('/login');
   }
 

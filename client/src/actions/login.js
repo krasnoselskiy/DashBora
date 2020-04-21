@@ -5,7 +5,7 @@ import history from '../routes/history';
 
 import store from '../store'
 
-export async function userLogin(payload) {
+export async function login(payload) {
   try {
     store.dispatch({
       type: ActionTypes.LOGIN_BEGIN,
@@ -35,7 +35,7 @@ export async function userLogin(payload) {
   }
 }
 
-export async function userRegister(payload) {
+export async function register(payload) {
   store.dispatch({
     type: ActionTypes.REGISTER_BEGIN,
     payload: payload
@@ -59,7 +59,7 @@ export async function userRegister(payload) {
   }
 }
 
-export async function isLoginCheck() {
+export async function isLogined() {
   if (localStorage.token) {
     const data = {
       headers: {

@@ -11,7 +11,7 @@ import Teams from '../containers/Teams';
 import TeamItem from '../components/TeamItem';
 import Profile from '../containers/Profile';
 import Forbidden from '../components/Forbidden';
-import { isLoginCheck } from '../actions/user';
+import { isLogined } from '../actions/login';
 import { AppRoute } from './appRoute';
 import history from './history';
 
@@ -20,7 +20,7 @@ import 'ant-design-pro/dist/ant-design-pro.css';
 
 function Routes() {
   useEffect(() => {
-    isLoginCheck();
+    isLogined();
 
 
   }, []);
@@ -43,7 +43,7 @@ function Routes() {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    isLoginCheck: () => dispatch(isLoginCheck())
+    isLogined: () => dispatch(isLogined())
   };
 }
 
