@@ -10,12 +10,18 @@ export class WidgetsService {
     @InjectModel('Widget') private readonly widgetModel: Model<Widget>
   ) { }
 
-  async create(createDogDto: CreateWidgetDto): Promise<Widget> {
-    const createdWidget = new this.widgetModel(createDogDto);
+  async create(createWidgetDto: CreateWidgetDto): Promise<Widget> {
+    const createdWidget = new this.widgetModel(createWidgetDto);
     return createdWidget.save();
   }
 
   async findAll(): Promise<Widget[]> {
     return this.widgetModel.find().exec();
+  }
+
+  async updateOne(widgetID, createWidgetDto: CreateWidgetDto): Promise<Widget> {
+    const updatedWidget = await this.widgetModel
+      .findByIdAndUpdate(widgetID, createWidgetDto, { new: true });
+    return updatedWidget;
   }
 }
