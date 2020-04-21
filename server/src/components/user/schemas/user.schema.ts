@@ -3,7 +3,10 @@ import * as bcrypt from 'bcrypt';
 
 export const UserSchema = new mongoose.Schema({
   username: String,
+  email: String,
   password: String,
+  teams: [],
+  personalWidgets: [],
   isSuperAdmin: {
     type: Boolean,
     default: false
