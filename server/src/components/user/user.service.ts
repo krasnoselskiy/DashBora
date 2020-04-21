@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 
 import { User } from './interfaces/user.interface';
-import { RegisterDTO, LoginDTO } from '../auth/auth-dto';
+import { RegisterDTO, LoginDTO } from '../auth/dto/auth-dto';
 
 @Injectable()
 export class UserService {
@@ -16,7 +16,8 @@ export class UserService {
 
   async create(userDTO: RegisterDTO) {
     const { username } = userDTO;
-    const user = await this.userModel.findOne({ username })
+    const user = await this.userModel.findOne({ username });
+
     if (user) {
       throw new HttpException('User already exsists',
         HttpStatus.BAD_REQUEST)
@@ -43,6 +44,18 @@ export class UserService {
       throw new HttpException('Invalid credentials',
         HttpStatus.UNAUTHORIZED);
     }
+  }
+
+  async findUserById(userID) {
+    const user = await this.userModel
+      .findById(userID)
+      .select('-password')
+      .exec();
+
+    if (!user) throw new HttpException('User does not exist!',
+      HttpStatus.UNAUTHORIZED);
+
+    return user;
   }
 
   async findByPayload(payload: any) {
