@@ -17,12 +17,12 @@ export class WidgetsController {
   }
 
   @Put('/edit')
-  async updateOne(
+  async addWidget(
     @Res() res,
     @Query('widgetID', new ValidateObjectId()) widgetID,
     @Body() createWidgetDto: CreateWidgetDto
   ): Promise<Widget[]> {
-    const editedWidget = await this.widgetsService.updateOne(widgetID, createWidgetDto);
+    const editedWidget = await this.widgetsService.addWidget(widgetID, createWidgetDto);
 
     if (!editedWidget) throw new NotFoundException('Widget does not exist!');
 

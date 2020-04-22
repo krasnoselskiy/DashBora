@@ -19,9 +19,17 @@ export class WidgetsService {
     return this.widgetModel.find().exec();
   }
 
-  async updateOne(widgetID, createWidgetDto: CreateWidgetDto): Promise<Widget> {
-    const updatedWidget = await this.widgetModel
-      .findByIdAndUpdate(widgetID, createWidgetDto, { new: true });
+  async addWidget(widgetID, createWidgetDto: CreateWidgetDto): Promise<Widget> {
+    const { users, name } = createWidgetDto;
+
+    const updatedWidget = await this.widgetModel.findOneAndUpdate(
+      { _id: widgetID },
+      {
+        $addToSet: { users: users }
+      },
+      { new: true }
+    )
+
     return updatedWidget;
   }
 }
