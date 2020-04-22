@@ -28,19 +28,19 @@ export async function widgetsFetch() {
 
 export async function addWidget(user_id, widget_id) {
   try {
-    const payload = {
-      "name": "Calenda 2"
-    };
-
     store.dispatch({
-      type: ActionTypes.ADD_WIDGET_BEGIN,
-      payload: payload
+      type: ActionTypes.ADD_WIDGET_BEGIN
     });
 
-    await axios.put('http://localhost:3001/api/v1/widgets/edit?widgetID=' + widget_id, payload);
+    const res = await axios.put(`http://localhost:3001/api/v1/widgets/edit?widgetID=${widget_id}`,
+      {
+        users: user_id,
+      }
+    );
 
     store.dispatch({
-      type: ActionTypes.ADD_WIDGET_SUCCESS
+      type: ActionTypes.ADD_WIDGET_SUCCESS,
+      payload: res.data.widget
     });
 
   } catch (e) {
