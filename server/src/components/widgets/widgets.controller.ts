@@ -16,13 +16,30 @@ export class WidgetsController {
     return this.widgetsService.findAll();
   }
 
-  @Put('/edit')
+  @Put('/add')
   async addWidget(
     @Res() res,
-    @Query('widgetID', new ValidateObjectId()) widgetID,
+    @Query('id', new ValidateObjectId()) widgetID,
     @Body() createWidgetDto: CreateWidgetDto
   ): Promise<Widget[]> {
     const editedWidget = await this.widgetsService.addWidget(widgetID, createWidgetDto);
+
+    if (!editedWidget) throw new NotFoundException('Widget does not exist!');
+
+    return res.status(HttpStatus.OK).json({
+      message: 'Widget has been successfully updated',
+      widget: editedWidget
+    })
+  }
+
+  @Put('/remove')
+  async removeWidget(
+    @Res() res,
+    @Query('id', new ValidateObjectId()) widgetID,
+    @Body() createWidgetDto: CreateWidgetDto
+  ): Promise<Widget[]> {
+    console.log('remove');
+    const editedWidget = await this.widgetsService.removeWidget(widgetID, createWidgetDto);
 
     if (!editedWidget) throw new NotFoundException('Widget does not exist!');
 

@@ -20,7 +20,7 @@ export class WidgetsService {
   }
 
   async addWidget(widgetID, createWidgetDto: CreateWidgetDto): Promise<Widget> {
-    const { users, name } = createWidgetDto;
+    const { users } = createWidgetDto;
 
     const updatedWidget = await this.widgetModel.findOneAndUpdate(
       { _id: widgetID },
@@ -29,6 +29,22 @@ export class WidgetsService {
       },
       { new: true }
     )
+
+    return updatedWidget;
+  }
+
+  async removeWidget(widgetID, createWidgetDto: CreateWidgetDto): Promise<Widget> {
+    const { users } = createWidgetDto;
+
+    const updatedWidget = await this.widgetModel.findOneAndUpdate(
+      { _id: widgetID },
+      {
+        $pull: { users: users }
+      },
+      { new: true }
+    )
+
+    console.log(updatedWidget);
 
     return updatedWidget;
   }
