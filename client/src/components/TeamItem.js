@@ -1,18 +1,29 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import { Link } from "react-router-dom";
+import {
+  MinusOutlined,
+  PlusOutlined
+} from '@ant-design/icons';
 import * as moment from 'moment';
 
 const TeamItem = (props) => {
-  const { name, date, _id } = props.item;
+  const { name, date } = props.item;
 
   return (
     <Card
       title={name}
       extra={
-        <Button type="primary">
-          <Link to={`/teams/${_id}`}>Go to team</Link>
-        </Button>
+        <>
+          <Button
+            style={{ marginRight: '10px' }}
+            type="primary"
+            shape="circle"
+            icon={<MinusOutlined />} />
+          <Button
+            type="primary"
+            shape="circle"
+            icon={<PlusOutlined />} />
+        </>
       }
     >
       <p>{moment(date).format('MM.DD.YYYY')}</p>
