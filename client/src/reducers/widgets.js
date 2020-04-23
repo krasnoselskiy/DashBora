@@ -76,6 +76,7 @@ export default function widgets(state = initialState, action) {
           isLoadBegin: false,
           isLoadSuccess: true,
           error: null,
+          list: state.list.concat(action.payload),
           personal: state.personal.filter(item => item._id !== action.payload._id)
         }
       )
