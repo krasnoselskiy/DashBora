@@ -32,7 +32,7 @@ export async function addWidget(user_id, widget_id) {
       type: ActionTypes.ADD_WIDGET_BEGIN
     });
 
-    const res = await axios.put(`http://localhost:3001/api/v1/widgets/edit?widgetID=${widget_id}`,
+    const res = await axios.put(`http://localhost:3001/api/v1/widgets/add?id=${widget_id}`,
       {
         users: user_id,
       }
@@ -47,6 +47,32 @@ export async function addWidget(user_id, widget_id) {
     message.error(e.response.data.message, 1);
     store.dispatch({
       type: ActionTypes.ADD_WIDGET_ERROR,
+      payload: e.response.data.message
+    });
+  }
+}
+
+export async function removeWidget(user_id, widget_id) {
+  try {
+    store.dispatch({
+      type: ActionTypes.REMOVE_WIDGET_BEGIN
+    });
+
+    const res = await axios.put(`http://localhost:3001/api/v1/widgets/remove?id=${widget_id}`,
+      {
+        users: user_id,
+      }
+    );
+
+    store.dispatch({
+      type: ActionTypes.REMOVE_WIDGET_SUCCESS,
+      payload: res.data.widget
+    });
+
+  } catch (e) {
+    message.error(e.response.data.message, 1);
+    store.dispatch({
+      type: ActionTypes.REMOVE_WIDGET_ERROR,
       payload: e.response.data.message
     });
   }
