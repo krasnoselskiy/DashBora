@@ -17,6 +17,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+}
+
 .site-layout-content {
   background: $white;
   padding: 24px;
