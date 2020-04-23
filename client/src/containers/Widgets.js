@@ -1,25 +1,25 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Col, Row } from 'antd';
 
-import { widgetsFetch, addWidget } from '../actions/widgets';
+import { widgetsFetch, addWidget, removeWidget } from '../actions/widgets';
 import Preloader from '../components/Preloader';
-import WidgetItem from '../components/WidgetItem';
+import List from '../components/widgets/List';
 import FetchError from '../components/FetchError';
 
 const Widgets = (props) => {
-  const { widgets, loading, error } = props;
+  const { all, personal, loading, error } = props;
+  const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
-    if (widgets.length === 0) {
-      widgetsFetch();
-    }
-  }, [widgets.length]);
+    widgetsFetch();
+  }, []);
 
   const addCurrentWidget = (widgetId) => {
-    const user_id = localStorage.getItem("user_id");
-
     addWidget(user_id, widgetId)
+  }
+
+  const removeCurrentWidget = (widgetId) => {
+    removeWidget(user_id, widgetId)
   }
 
   return (
@@ -27,25 +27,34 @@ const Widgets = (props) => {
       {loading && Preloader ?
         <Preloader /> : null
       }
+
       {error && FetchError ?
         <FetchError /> : null
       }
 
-      <h2>All widgets</h2>
-      <Row
-        gutter={16}>
-          {widgets && WidgetItem ?
-            widgets.map((item) => (
-              <Col
-                key={item._id}
-                span={8}>
-                <WidgetItem addWidget={addCurrentWidget} item={item} />
-              </Col>
-            )) : null}
-      </Row>
+      {all && List ?
+        <List
+          title={'All widgets'}
+          gutter={16}
+          widgetsType={'all'}
+          widgets={all}
+          addCurrentWidget={addCurrentWidget}
+          removeCurrentWidget={removeCurrentWidget}
+        /> :
+        null
+      }
 
-      <h2>Installed widgets</h2>
-
+      {personal && List ?
+        <List
+          title={'Installed widgets'}
+          gutter={16}
+          widgetsType={'personal'}
+          widgets={personal}
+          addCurrentWidget={addCurrentWidget}
+          removeCurrentWidget={removeCurrentWidget}
+        /> :
+        null
+      }
     </React.Fragment>
   );
 }
@@ -54,12 +63,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     widgetsFetch: () => dispatch(widgetsFetch()),
     addWidget: () => dispatch(addWidget()),
+    removeWidget: () => dispatch(removeWidget()),
   };
 }
 
 const mapStateToProps = (state) => {
   return {
-    widgets: state.widgets.list,
+    all: state.widgets.list,
+    personal: state.widgets.personal,
     loading: state.widgets.isLoadBegin,
     error: state.widgets.error,
   };

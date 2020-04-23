@@ -5,6 +5,7 @@ const initialState = {
   isLoadSuccess: false,
   error: null,
   list: [],
+  personal: []
 }
 
 export default function widgets(state = initialState, action) {
@@ -27,6 +28,68 @@ export default function widgets(state = initialState, action) {
         isLoadSuccess: true,
         error: action.payload
       })
+    case ActionTypes.ADD_WIDGET_BEGIN:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: true,
+          error: null
+        }
+      )
+    case ActionTypes.ADD_WIDGET_SUCCESS:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: false,
+          isLoadSuccess: true,
+          error: null,
+          list: state.list.filter(item => item._id !== action.payload._id),
+          personal: state.personal.concat(action.payload)
+        }
+      )
+    case ActionTypes.ADD_WIDGET_ERROR:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: false,
+          isLoadSuccess: false,
+          error: action.payload
+        }
+      )
+    case ActionTypes.REMOVE_WIDGET_BEGIN:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: true,
+          error: null
+        }
+      )
+    case ActionTypes.REMOVE_WIDGET_SUCCESS:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: false,
+          isLoadSuccess: true,
+          error: null,
+          personal: state.personal.filter(item => item._id !== action.payload._id)
+        }
+      )
+    case ActionTypes.REMOVE_WIDGET_ERROR:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: false,
+          isLoadSuccess: false,
+          error: action.payload
+        }
+      )
+
     default:
       return state
   }
