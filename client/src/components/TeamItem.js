@@ -15,7 +15,6 @@ const TeamItem = (props) => {
       extra={
         <>
           <Button
-            style={{ marginRight: '10px' }}
             type="primary"
             shape="circle"
             icon={<MinusOutlined />} />
