@@ -3,6 +3,7 @@ import { AppModule } from './components/app/app.module';
 import * as helmet from 'helmet';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config/env';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const port = config.PORT || 3000;
@@ -21,8 +22,8 @@ async function bootstrap() {
 
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(port, () => {
-    console.log(`The server is running at http://localhost:${port}`)
-  });
+  await app.listen(port);
+
+  Logger.log(`The server is running at http://localhost:${port}`, 'Bootstrap');
 }
 bootstrap();
