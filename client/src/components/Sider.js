@@ -23,7 +23,9 @@ const Sider = (props) => {
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1">
           <PieChartOutlined />
-          <Link to="/widgets">My widgets</Link>
+          <Badge count={0}>
+            <Link to="/widgets">My widgets</Link>
+          </Badge>
         </Menu.Item>
         {/* <Menu.Item key="2">
           <DesktopOutlined />
