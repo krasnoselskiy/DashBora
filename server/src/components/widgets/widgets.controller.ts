@@ -38,7 +38,6 @@ export class WidgetsController {
     @Query('id', new ValidateObjectId()) widgetID,
     @Body() createWidgetDto: CreateWidgetDto
   ): Promise<Widget[]> {
-    console.log('remove');
     const editedWidget = await this.widgetsService.removeWidget(widgetID, createWidgetDto);
 
     if (!editedWidget) throw new NotFoundException('Widget does not exist!');

@@ -44,7 +44,6 @@ export class WidgetsService {
       { new: true }
     )
 
-    console.log(updatedWidget);
 
     return updatedWidget;
   }
