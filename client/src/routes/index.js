@@ -8,7 +8,7 @@ import Login from '../components/Login'
 import Register from '../components/Register';
 import Widgets from '../containers/Widgets';
 import Teams from '../containers/Teams';
-import TeamItem from '../components/TeamItem';
+import TeamItem from '../components/team/TeamItem';
 import Profile from '../containers/Profile';
 import Forbidden from '../components/Forbidden';
 import { isLogined } from '../actions/login';
