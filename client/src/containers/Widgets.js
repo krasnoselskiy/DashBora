@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { widgetsFetch, addWidget, removeWidget } from '../actions/widgets';
+import {
+  allWidgetsFetch,
+  personalWidgetsFetch,
+  addWidgetToUser,
+  removeUserWidget
+} from '../actions/widgets';
 import Preloader from '../components/Preloader';
 import List from '../components/widgets/List';
 import FetchError from '../components/FetchError';
@@ -11,15 +16,16 @@ const Widgets = (props) => {
   const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
-    widgetsFetch();
-  }, []);
+    allWidgetsFetch();
+    personalWidgetsFetch(user_id);
+  }, [user_id]);
 
   const addCurrentWidget = (widgetId) => {
-    addWidget(user_id, widgetId)
+    addWidgetToUser(user_id, widgetId)
   }
 
   const removeCurrentWidget = (widgetId) => {
-    removeWidget(user_id, widgetId)
+    removeUserWidget(user_id, widgetId)
   }
 
   return (
@@ -32,7 +38,7 @@ const Widgets = (props) => {
         <FetchError /> : null
       }
 
-      {all && List ?
+      {all && List && !error ?
         <List
           title={'All widgets'}
           gutter={16}
@@ -44,7 +50,7 @@ const Widgets = (props) => {
         null
       }
 
-      {personal && List ?
+      {personal && List && !error ?
         <List
           title={'Installed widgets'}
           gutter={16}
@@ -61,9 +67,10 @@ const Widgets = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    widgetsFetch: () => dispatch(widgetsFetch()),
-    addWidget: () => dispatch(addWidget()),
-    removeWidget: () => dispatch(removeWidget()),
+    allWidgetsFetch: () => dispatch(allWidgetsFetch()),
+    personalWidgetsFetch: () => dispatch(personalWidgetsFetch()),
+    addWidgetToUser: () => dispatch(addWidgetToUser()),
+    removeUserWidget: () => dispatch(removeUserWidget()),
   };
 }
 

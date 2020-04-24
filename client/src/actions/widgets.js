@@ -4,44 +4,64 @@ import { message } from 'antd';
 
 import store from '../store'
 
-export async function widgetsFetch() {
+export async function allWidgetsFetch() {
   try {
     store.dispatch({
-      type: ActionTypes.WIDGETS_LOAD_BEGIN
+      type: ActionTypes.All_WIDGETS_LOAD_BEGIN
     });
 
     const res = await axios.get('http://localhost:3001/api/v1/widgets');
 
     store.dispatch({
-      type: ActionTypes.WIDGETS_LOAD_SUCCESS,
+      type: ActionTypes.All_WIDGETS_LOAD_SUCCESS,
       payload: res.data
     });
 
   } catch (e) {
     message.error(e.response.data.message, 1);
     store.dispatch({
-      type: ActionTypes.LOGIN_ERROR,
+      type: ActionTypes.All_WIDGETS_LOAD_ERROR,
       payload: e.response.data.message
     });
   }
 }
 
-export async function addWidget(user_id, widget_id) {
+export async function personalWidgetsFetch(userId) {
+  try {
+    store.dispatch({
+      type: ActionTypes.PERSONAL_WIDGETS_LOAD_BEGIN
+    });
+
+    const res = await axios.get(`http://localhost:3001/api/v1/user/${userId}/widgets`);
+
+    store.dispatch({
+      type: ActionTypes.PERSONAL_WIDGETS_LOAD_SUCCESS,
+      payload: res.data
+    });
+
+  } catch (e) {
+    message.error(e.response.data.message, 1);
+    store.dispatch({
+      type: ActionTypes.PERSONAL_WIDGETS_LOAD_ERROR,
+      payload: e.response.data.message
+    });
+  }
+}
+
+export async function addWidgetToUser(userId, widgetId) {
   try {
     store.dispatch({
       type: ActionTypes.ADD_WIDGET_BEGIN
     });
 
-    const res = await axios.put(`http://localhost:3001/api/v1/widgets/add?id=${widget_id}`,
+    await axios.post(`http://localhost:3001/api/v1/user/addWidget`,
       {
-        users: user_id,
+        userId,
+        widgetId
       }
     );
 
-    store.dispatch({
-      type: ActionTypes.ADD_WIDGET_SUCCESS,
-      payload: res.data.widget
-    });
+    personalWidgetsFetch(userId);
 
   } catch (e) {
     message.error(e.response.data.message, 1);
@@ -52,7 +72,7 @@ export async function addWidget(user_id, widget_id) {
   }
 }
 
-export async function removeWidget(user_id, widget_id) {
+export async function removeUserWidget(user_id, widget_id) {
   try {
     store.dispatch({
       type: ActionTypes.REMOVE_WIDGET_BEGIN
