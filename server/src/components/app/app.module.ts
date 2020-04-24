@@ -13,8 +13,11 @@ import config from '../../config/env';
     MongooseModule.forRoot(
       config.DB_URI,
       {
+        keepAlive: true,
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
       }
     ),
     ProfileModule,
