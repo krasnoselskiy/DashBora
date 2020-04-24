@@ -1,12 +1,20 @@
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
+const Schema = mongoose.Schema;
+
 export const UserSchema = new mongoose.Schema({
   username: String,
   email: String,
   password: String,
-  teams: [],
-  personalWidgets: [],
+  teams: [{
+    type: Schema.Types.ObjectId,
+    ref: 'team'
+  }],
+  personalWidgets: [{
+    type: Schema.Types.ObjectId,
+    ref: 'widget'
+  }],
   isSuperAdmin: {
     type: Boolean,
     default: false
