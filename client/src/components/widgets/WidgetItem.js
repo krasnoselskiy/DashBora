@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Button } from 'antd';
 import {
   MinusOutlined,
@@ -11,12 +11,10 @@ const WidgetItem = (props) => {
   const { addWidget, removeWidget, widgetsType } = props;
 
   const addWidgetHandler = (e) => {
-    // setWidget(!isAdded);
     addWidget(e.target.dataset.widget);
   }
 
   const removeWidgetHandler = (e) => {
-    // setWidget(!isAdded);
     removeWidget(e.target.dataset.widget);
   }
 
