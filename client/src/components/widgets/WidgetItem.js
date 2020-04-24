@@ -21,6 +21,7 @@ const WidgetItem = (props) => {
   return (
     <Card
       title={name}
+      style={{ marginBottom: "16px" }}
       extra={
         <>
           {(widgetsType === 'all') ?
