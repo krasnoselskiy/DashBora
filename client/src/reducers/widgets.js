@@ -10,24 +10,68 @@ const initialState = {
 
 export default function widgets(state = initialState, action) {
   switch (action.type) {
-    case ActionTypes.WIDGETS_LOAD_BEGIN:
-      return Object.assign({}, state, {
-        isLoadBegin: true,
-      })
-    case ActionTypes.WIDGETS_LOAD_SUCCESS:
-      return Object.assign({},
-        state, {
+    case ActionTypes.All_WIDGETS_LOAD_BEGIN:
+      return Object.assign(
+        {},
+          state,
+        {
+          isLoadBegin: true,
+        }
+      )
+    case ActionTypes.All_WIDGETS_LOAD_SUCCESS:
+      return Object.assign(
+        {},
+        state,
+        {
           isLoadBegin: false,
           isLoadSuccess: true,
           error: null,
-          list: state.list.concat(action.payload)
+          list: action.payload
         }
       )
-    case ActionTypes.WIDGETS_LOAD_ERROR:
-      return Object.assign({}, state, {
-        isLoadSuccess: true,
-        error: action.payload
-      })
+    case ActionTypes.All_WIDGETS_LOAD_ERROR:
+      return Object.assign(
+        {},
+        state,
+        {
+          list: [],
+          isLoadBegin: false,
+          isLoadSuccess: false,
+          error: action.payload
+        }
+      )
+    case ActionTypes.PERSONAL_WIDGETS_LOAD_BEGIN:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: true,
+          personal: [],
+          error: null
+        }
+      )
+    case ActionTypes.PERSONAL_WIDGETS_LOAD_SUCCESS:
+      return Object.assign(
+        {},
+        state,
+        {
+          isLoadBegin: false,
+          isLoadSuccess: true,
+          personal: state.personal.concat(action.payload),
+          error: null
+        }
+      )
+    case ActionTypes.PERSONAL_WIDGETS_LOAD_ERROR:
+      return Object.assign(
+        {},
+        state,
+        {
+          personal: [],
+          isLoadBegin: false,
+          isLoadSuccess: false,
+          error: action.payload
+        }
+      )
     case ActionTypes.ADD_WIDGET_BEGIN:
       return Object.assign(
         {},
