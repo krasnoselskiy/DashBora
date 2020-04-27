@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import * as moment from 'moment';
 
-const TeamItem = (props) => {
+const Team = (props) => {
   const { name, date } = props.item;
 
   return (
@@ -30,4 +30,4 @@ const TeamItem = (props) => {
   );
 }
 
-export default TeamItem;
+export default Team;

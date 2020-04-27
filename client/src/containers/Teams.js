@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Col, Row } from 'antd';
 
 import { teamsFetch } from '../actions/teams';
-import TeamItem from '../components/team/TeamItem';
+import TeamItem from '../components/team/Team';
 import Preloader from '../components/Preloader';
 import FetchError from '../components/FetchError';
 
