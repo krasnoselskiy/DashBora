@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row } from 'antd';
 import styled from '@emotion/styled';
 
-import WidgetItem from './WidgetItem';
+import WidgetCard from './WidgetCard';
 
 const List = (props) => {
   const {
@@ -19,13 +19,13 @@ const List = (props) => {
       {title && widgets.length ? <h2>{title}</h2> : null}
       <Row
         gutter={gutter}>
-        {widgets && WidgetItem ?
+        {widgets && WidgetCard ?
           widgets.map((item, i) => (
             <Col
               key={i}
               span={8}>
 
-              <WidgetItem
+              <WidgetCard
                 widgetsType={widgetsType}
                 addWidget={addCurrentWidget}
                 removeWidget={removeCurrentWidget}

@@ -7,8 +7,8 @@ import {
 import { Link } from "react-router-dom";
 import * as moment from 'moment';
 
-const WidgetItem = (props) => {
-  const { name, date, _id } = props.item;
+const WidgetCard = (props) => {
+  const { name, date, _id, slug, type } = props.item;
   const { addWidget, removeWidget, widgetsType } = props;
 
   const addWidgetHandler = (e) => {
@@ -32,26 +32,22 @@ const WidgetItem = (props) => {
               type="primary"
               shape="circle"
               icon={<PlusOutlined />}
-            /> :
-            <Button
-              data-widget={_id}
-              onClick={removeWidgetHandler}
-              type="primary"
-              shape="circle"
-              icon={<MinusOutlined />}
-            />
+            /> : null
           }
         </>
       }
     >
       <p>{moment(date).format('MM.DD.YYYY')}</p>
-      <Button
-        type="primary"
-      >
-        <Link to={`/widgets/${name}`}>Go to {name}</Link>
-      </Button>
+      {(widgetsType === 'personal') ?
+        <Button
+          type="primary"
+        >
+          <Link to={`/widgets/${slug}`}>Go to {name}</Link>
+        </Button>
+        : null
+      }
     </Card>
   );
 }
 
-export default WidgetItem;
+export default WidgetCard;
