@@ -4,6 +4,7 @@ import {
   MinusOutlined,
   PlusOutlined
 } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 import * as moment from 'moment';
 
 const WidgetItem = (props) => {
@@ -44,6 +45,11 @@ const WidgetItem = (props) => {
       }
     >
       <p>{moment(date).format('MM.DD.YYYY')}</p>
+      <Button
+        type="primary"
+      >
+        <Link to={`/widgets/${name}`}>Go to {name}</Link>
+      </Button>
     </Card>
   );
 }
