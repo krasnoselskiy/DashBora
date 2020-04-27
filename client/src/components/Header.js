@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <Header className="site-layout-background" style={{ padding: 0 }}>
-      <div className="logo">FamilyBoard</div>
+      <div className="logo">WidgetHub</div>
     </Header>
   );
 }
