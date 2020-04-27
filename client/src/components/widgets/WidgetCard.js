@@ -1,22 +1,17 @@
 import React from 'react';
 import { Card, Button } from 'antd';
 import {
-  MinusOutlined,
   PlusOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import * as moment from 'moment';
 
 const WidgetCard = (props) => {
-  const { name, date, _id, slug, type } = props.item;
-  const { addWidget, removeWidget, widgetsType } = props;
+  const { name, date, _id, slug } = props.item;
+  const { addWidget, widgetsType } = props;
 
   const addWidgetHandler = (e) => {
     addWidget(e.target.dataset.widget);
-  }
-
-  const removeWidgetHandler = (e) => {
-    removeWidget(e.target.dataset.widget);
   }
 
   return (
