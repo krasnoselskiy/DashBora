@@ -1,50 +1,83 @@
 import { ValidateObjectId } from '../shared/pipes/validate-object-id.pipes';
-import { CreateWidgetDto } from './dto/create-widget.dto';
+import { CreateWidgetDto, UpdateWidgetDto, RemoveWidgetDto } from './dto/widget.dto';
 import { WidgetsService } from './widgets.service';
-import { Controller, Post, Body, Get, Put, Param, HttpStatus, Res, Query, NotFoundException } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Param, HttpStatus, Res, Query, NotFoundException, Inject, forwardRef } from '@nestjs/common';
 import { Widget } from './interfaces/widget.interface';
+import { UserService } from '../user/user.service';
 
 
 @Controller('widgets')
 export class WidgetsController {
   constructor(
     private widgetsService: WidgetsService,
+    private userService: UserService,
   ) { }
 
-  @Get()
-  async findAll(): Promise<Widget[]> {
-    return this.widgetsService.findAll();
+  @Get('/:userId')
+  async findAllExceptAdded(
+    @Res() res,
+    @Param('userId', new ValidateObjectId()) userId
+  ) {
+    const widgets = await this.widgetsService.findAllExcept(userId);
+
+    // if (!widgets.length) throw new NotFoundException('We have no widgets!');
+
+    return res.status(HttpStatus.OK).json(widgets)
   }
 
-  @Put('/add')
-  async addWidget(
+  @Post('/create')
+  async createWidget(
     @Res() res,
-    @Query('id', new ValidateObjectId()) widgetID,
     @Body() createWidgetDto: CreateWidgetDto
   ): Promise<Widget[]> {
-    const editedWidget = await this.widgetsService.addWidget(widgetID, createWidgetDto);
+    const widget = await this.widgetsService.create(createWidgetDto);
 
-    if (!editedWidget) throw new NotFoundException('Widget does not exist!');
+    if (!widget) throw new NotFoundException('Cant create this widget!');
 
     return res.status(HttpStatus.OK).json({
       message: 'Widget has been successfully updated',
-      widget: editedWidget
+      // widget: widget
     })
   }
 
-  @Put('/remove')
-  async removeWidget(
+  @Post('/add')
+  async addWidget(
     @Res() res,
     @Query('id', new ValidateObjectId()) widgetID,
-    @Body() createWidgetDto: CreateWidgetDto
+    @Body() updateWidgetDto: UpdateWidgetDto
   ): Promise<Widget[]> {
-    const editedWidget = await this.widgetsService.removeWidget(widgetID, createWidgetDto);
 
-    if (!editedWidget) throw new NotFoundException('Widget does not exist!');
+    const widget = await this.widgetsService.addWidget(widgetID, updateWidgetDto);
+
+    if (!widget) throw new NotFoundException('Widget does not exist!');
 
     return res.status(HttpStatus.OK).json({
       message: 'Widget has been successfully updated',
-      widget: editedWidget
+      widget: widget
+    })
+  }
+
+  @Post('/remove')
+  async removeWidget(
+    @Res() res,
+    @Query('id', new ValidateObjectId()) widgetID,
+    @Body() removeWidgetDto: RemoveWidgetDto
+  ): Promise<Widget[]> {
+
+    const { userId, widgetId } = removeWidgetDto;
+    const removedWidget = await this.widgetsService.removeWidget(removeWidgetDto);
+    const updatedUser = await this.userService.removeProperty(
+      userId,
+      widgetId,
+      'personalWidgets'
+    );
+
+    if (!removedWidget || !updatedUser) throw new NotFoundException('Widget or user does not exist!');
+
+    return res.status(HttpStatus.OK).json({
+      message: 'Widget has been successfully updated',
+      widget: removedWidget,
+      user: updatedUser
     })
   }
 

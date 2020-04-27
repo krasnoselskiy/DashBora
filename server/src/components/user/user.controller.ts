@@ -1,14 +1,16 @@
-import { Controller, Get, Res, Param, HttpStatus, Put, Body, Query, NotFoundException, Post } from '@nestjs/common';
+import { WidgetsService } from './../widgets/widgets.service';
+import { Controller, Get, Res, Param, HttpStatus, Put, Body, NotFoundException, Post, Inject, forwardRef } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { ValidateObjectId } from '../shared/pipes/validate-object-id.pipes';
 import { User } from './interfaces/user.interface';
 import { UserDTO } from './dto/user.dto';
+import { UpdateWidgetDto } from '../widgets/dto/widget.dto';
 
 @Controller('user')
 export class UserController {
   constructor(
     private userService: UserService,
-    // private widgetsService: WidgetsService,
+    private widgetsService: WidgetsService,
   ) {
   }
 
@@ -18,6 +20,7 @@ export class UserController {
     @Param('userId', new ValidateObjectId()) userId
   ) {
     const user = await this.userService.findUserById(userId);
+    if (!user) throw new NotFoundException('User does not exist!');
     return res.status(HttpStatus.OK).json(user);
   }
 
@@ -27,18 +30,22 @@ export class UserController {
     @Param('userId', new ValidateObjectId()) userId
   ) {
     const user = await this.userService.findUserById(userId);
+    // if (!user.personalWidgets.length) throw new NotFoundException('User does not have widgets');
     return res.status(HttpStatus.OK).json(user.personalWidgets);
   }
 
   @Post('/addWidget')
   async addWidget(
     @Res() res,
-    @Body() body
+    @Body() updateWidgetDto: UpdateWidgetDto
   ) {
-    const { userId, widgetId } = body;
+    const { userId, widgetId } = updateWidgetDto;
+    const widget = await this.widgetsService.findWidgetById(widgetId);
+    const user = await this.widgetsService.addWidget(widgetId, updateWidgetDto);
+
     const updatedUser = await this.userService.addProperty(
       userId,
-      widgetId,
+      widget,
       'personalWidgets'
     );
 
@@ -46,7 +53,7 @@ export class UserController {
 
     return res.status(HttpStatus.OK).json({
       message: 'Widget has been successfully added',
-      user: updatedUser
+      widget: widget
     })
   }
 

@@ -5,10 +5,13 @@ import * as bcrypt from 'bcrypt';
 
 import { User } from './interfaces/user.interface';
 import { RegisterDTO, LoginDTO } from '../auth/dto/auth-dto';
-
+import { UserDTO } from './dto/user.dto';
+import { ObjectId } from 'mongodb';
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private userModel: Model<User>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<User>,
+  ) { }
 
   private sanitizeUser(user: User) {
     return user.depopulate('password');
@@ -61,5 +64,58 @@ export class UserService {
   async findByPayload(payload: any) {
     const { username } = payload;
     return await this.userModel.findOne({ username });
+  }
+
+  async addProperty(userID, property, propertyType) {
+    const obj = {};
+    obj[propertyType] = [];
+
+    obj[propertyType].push(property)
+
+    const updatedUser = await this.userModel
+      .findOneAndUpdate(
+        { _id: userID },
+        {
+          $addToSet: obj
+        },
+        { new: true }
+    ).select('-password');
+
+    return updatedUser;
+  }
+
+  async removeProperty(userID, widgetID, property) {
+    const propObjectId = new ObjectId(widgetID);
+    const obj = {};
+    obj[property] = {
+      '_id': propObjectId
+    };
+
+    const updatedUser = await this.userModel
+      .findOneAndUpdate(
+        { _id: userID },
+        { $pull: obj },
+        { new: true }
+      ).select('-password');
+
+    return updatedUser;
+  }
+
+  async updateUserTeam(userDTO: UserDTO): Promise<User> {
+    const { _id, teams } = userDTO;
+    const team_id = '2211221212121';
+
+    const updatedUser = await this.userModel.findOneAndUpdate(
+      { _id: _id },
+      { $push: { teams: team_id } },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(success);
+        }
+      });
+
+    return updatedUser;
   }
 }

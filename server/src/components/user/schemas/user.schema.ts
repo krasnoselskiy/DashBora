@@ -11,10 +11,7 @@ export const UserSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'team'
   }],
-  personalWidgets: [{
-    type: Schema.Types.ObjectId,
-    ref: 'widget'
-  }],
+  personalWidgets: [],
   isSuperAdmin: {
     type: Boolean,
     default: false
