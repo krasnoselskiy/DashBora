@@ -4,13 +4,13 @@ import { message } from 'antd';
 
 import store from '../store'
 
-export async function allWidgetsFetch() {
+export async function allWidgetsFetch(user_id) {
   try {
     store.dispatch({
       type: ActionTypes.All_WIDGETS_LOAD_BEGIN
     });
 
-    const res = await axios.get('http://localhost:3001/api/v1/widgets');
+    const res = await axios.get(`http://localhost:3001/api/v1/widgets/${user_id}`);
 
     store.dispatch({
       type: ActionTypes.All_WIDGETS_LOAD_SUCCESS,
@@ -54,14 +54,19 @@ export async function addWidgetToUser(userId, widgetId) {
       type: ActionTypes.ADD_WIDGET_BEGIN
     });
 
-    await axios.post(`http://localhost:3001/api/v1/user/addWidget`,
+    const res = await axios.post(`http://localhost:3001/api/v1/user/addWidget`,
       {
         userId,
         widgetId
       }
     );
 
-    personalWidgetsFetch(userId);
+    store.dispatch({
+      type: ActionTypes.ADD_WIDGET_SUCCESS,
+      payload: res.data.widget
+    });
+
+    // personalWidgetsFetch(userId);
 
   } catch (e) {
     message.error(e.response.data.message, 1);
@@ -78,9 +83,10 @@ export async function removeUserWidget(user_id, widget_id) {
       type: ActionTypes.REMOVE_WIDGET_BEGIN
     });
 
-    const res = await axios.put(`http://localhost:3001/api/v1/widgets/remove?id=${widget_id}`,
+    const res = await axios.post(`http://localhost:3001/api/v1/widgets/remove?id=${widget_id}`,
       {
-        users: user_id,
+        userId: user_id,
+        widgetId: widget_id,
       }
     );
 
