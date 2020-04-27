@@ -16,16 +16,16 @@ const Widgets = (props) => {
   const user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
-    allWidgetsFetch();
+    allWidgetsFetch(user_id);
     personalWidgetsFetch(user_id);
   }, [user_id]);
 
   const addCurrentWidget = (widgetId) => {
-    addWidgetToUser(user_id, widgetId)
+    addWidgetToUser(user_id, widgetId);
   }
 
   const removeCurrentWidget = (widgetId) => {
-    removeUserWidget(user_id, widgetId)
+    removeUserWidget(user_id, widgetId);
   }
 
   return (
