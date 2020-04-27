@@ -36,7 +36,7 @@ export class WidgetsController {
 
     return res.status(HttpStatus.OK).json({
       message: 'Widget has been successfully updated',
-      // widget: widget
+      widget: widget
     })
   }
 

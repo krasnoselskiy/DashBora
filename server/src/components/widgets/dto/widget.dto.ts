@@ -2,6 +2,7 @@ export class CreateWidgetDto {
   name: string;
   description: string;
   type: string;
+  slug: string;
   date: Date;
   users: UserDTO[];
 }
@@ -14,11 +15,6 @@ export class RemoveWidgetDto {
 export class UpdateWidgetDto {
   widgetId: string;
   userId: string;
-  name: string;
-  description: string;
-  type: string;
-  date: Date;
-  users: UserDTO[];
 }
 
 interface UserDTO {
