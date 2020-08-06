@@ -13,7 +13,7 @@ export class WidgetsController {
     private userService: UserService,
   ) { }
 
-  @Get('/:userId')
+  @Get('/user/:userId')
   async findAllExceptAdded(
     @Res() res,
     @Param('userId', new ValidateObjectId()) userId
@@ -23,6 +23,18 @@ export class WidgetsController {
     // if (!widgets.length) throw new NotFoundException('We have no widgets!');
 
     return res.status(HttpStatus.OK).json(widgets)
+  }
+
+  @Get(':widgetId')
+  async getOneWidget(
+    @Res() res,
+    @Param('widgetId', new ValidateObjectId()) widgetId
+  ) {
+    const widget = await this.widgetsService.findWidgetById(widgetId);
+
+    if (!widget) throw new NotFoundException('No widget with this id!');
+
+    return res.status(HttpStatus.OK).json(widget)
   }
 
   @Post('/create')

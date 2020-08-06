@@ -41,7 +41,7 @@ export class WidgetsService {
     return updatedWidget;
   }
 
-  async findWidgetById(widgetId) {
+  async findWidgetById(widgetId): Promise<Widget> {
     const widget = await this.widgetModel
       .findById(widgetId)
       .exec();

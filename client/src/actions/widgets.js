@@ -2,7 +2,29 @@ import ActionTypes from '../constants/actionTypes'
 import axios from "axios";
 import { message } from 'antd';
 
-import store from '../store'
+import store from '../store';
+
+export async function oneWidgetFetch(widget_id) {
+  try {
+    store.dispatch({
+      type: ActionTypes.ONE_WIDGET_LOAD_BEGIN
+    });
+
+    const res = await axios.get(`http://localhost:3001/api/v1/widgets/${widget_id}`);
+
+    store.dispatch({
+      type: ActionTypes.ONE_WIDGET_LOAD_SUCCESS,
+      payload: res.data
+    });
+
+  } catch (e) {
+    message.error(e.response.data.message, 1);
+    store.dispatch({
+      type: ActionTypes.ONE_WIDGET_LOAD_ERROR,
+      payload: e.response.data.message
+    });
+  }
+}
 
 export async function allWidgetsFetch(user_id) {
   try {
@@ -10,7 +32,7 @@ export async function allWidgetsFetch(user_id) {
       type: ActionTypes.All_WIDGETS_LOAD_BEGIN
     });
 
-    const res = await axios.get(`http://localhost:3001/api/v1/widgets/${user_id}`);
+    const res = await axios.get(`http://localhost:3001/api/v1/widgets/user/${user_id}`);
 
     store.dispatch({
       type: ActionTypes.All_WIDGETS_LOAD_SUCCESS,
@@ -103,4 +125,3 @@ export async function removeUserWidget(user_id, widget_id) {
     });
   }
 }
-
